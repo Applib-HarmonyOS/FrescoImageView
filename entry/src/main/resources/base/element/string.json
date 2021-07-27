@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "FrescoImageView"
+    },
+    {
+      "name": "mainability_description",
+      "value": "Java_Phone_Empty Feature Ability"
+    },
+    {
+      "name": "mainability_HelloWorld",
+      "value": "Hello World"
+    },
+    {
+      "name": "fresco_normal",
+      "value": "Fresco Normal Activity"
+    },
+    {
+      "name": "fresco_zoom",
+      "value": "Fresco Zoom Activity"
+    },
+    {
+      "name": "fresco_gif",
+      "value": "Fresco Gif Activity"
+    }
+  ]
+}
