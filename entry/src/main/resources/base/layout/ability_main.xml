@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:height="match_parent"
+    ohos:width="match_parent"
+    ohos:alignment="center"
+    ohos:orientation="vertical">
+
+    <Button
+        ohos:id="$+id:btn_fresco_normal"
+        ohos:height="match_content"
+        ohos:width="match_parent"
+        ohos:bottom_margin="30vp"
+        ohos:text="$string:fresco_normal"
+        ohos:text_size="20vp"
+        />
+
+    <Button
+        ohos:id="$+id:btn_fresco_zoom"
+        ohos:height="match_content"
+        ohos:width="match_parent"
+        ohos:bottom_margin="30vp"
+        ohos:text="$string:fresco_zoom"
+        ohos:text_size="20vp"
+        />
+
+    <Button
+        ohos:id="$+id:btn_fresco_gif"
+        ohos:height="match_content"
+        ohos:width="match_parent"
+        ohos:bottom_margin="30vp"
+        ohos:text="$string:fresco_gif"
+        ohos:text_size="20vp"
+        />
+
+</DirectionalLayout>

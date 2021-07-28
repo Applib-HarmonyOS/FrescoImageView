@@ -1,0 +1,27 @@
+apply plugin: 'com.huawei.ohos.library'
+ohos {
+    compileSdkVersion 5
+    defaultConfig {
+        compatibleSdkVersion 5
+    }
+    buildTypes {
+        release {
+            proguardOpt {
+                proguardEnabled false
+                rulesFiles 'proguard-rules.pro'
+            }
+        }
+    }
+    
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.13'
+    implementation('io.openharmony.tpc.thirdlib:fresco:1.0.1')
+    implementation('io.openharmony.tpc.thirdlib:animated_gif_lite:1.0.1')
+    implementation('io.openharmony.tpc.thirdlib:animated_base:1.0.1')
+    implementation('io.openharmony.tpc.thirdlib:animated_drawable:1.0.1')
+    implementation('io.openharmony.tpc.thirdlib:animated_gif:1.0.1')
+    implementation('io.openharmony.tpc.thirdlib:fresco_gif:1.0.1')
+}
