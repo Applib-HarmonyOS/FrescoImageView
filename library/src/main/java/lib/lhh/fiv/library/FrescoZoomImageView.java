@@ -72,6 +72,13 @@ public class FrescoZoomImageView extends ZoomableDraweeView implements FrescoCon
         super(context, attrs, defStyle);
     }
 
+    private void setSourceController() {
+        mRequest = FrescoFactory.buildImageRequestWithSource(this);
+        mLowResRequest = FrescoFactory.buildLowImageRequest(this);
+        mController = FrescoFactory.buildDraweeController(this);
+        this.setController(mController);
+    }
+
     private void setResourceController() {
 
         mRequest = FrescoFactory.buildImageRequestWithResource(this);
@@ -81,15 +88,28 @@ public class FrescoZoomImageView extends ZoomableDraweeView implements FrescoCon
         this.setController(mController);
     }
 
-    private void setSourceController() {
+    @Override
+    public void loadLocalImage(String path, int defaultResZoom) {
+        try {
+            mThumbnailPath = path;
+            mDefaultResID = defaultResZoom;
+            this.getHierarchy().setPlaceholderImage(mDefaultResID);
 
-        mRequest = FrescoFactory.buildImageRequestWithSource(this);
+            if (TextUtils.isEmpty(mThumbnailPath)) {
+                this.setResourceController();
+                return;
+            }
 
-        mLowResRequest = FrescoFactory.buildLowImageRequest(this);
+            mThumbnailUrl = null;
+            mLowThumbnailUrl = null;
 
-        mController = FrescoFactory.buildDraweeController(this);
-
-        this.setController(mController);
+            if (!mThumbnailPath.startsWith(FrescoController.FILE_PREFIX)) {
+                mThumbnailPath = FrescoController.FILE_PREFIX + mThumbnailPath;
+            }
+            this.setSourceController();
+        } catch (OutOfMemoryError e) {
+            HiLog.error(LABEL_LOG, e.getMessage());
+        }
     }
 
     @Override
@@ -98,54 +118,29 @@ public class FrescoZoomImageView extends ZoomableDraweeView implements FrescoCon
     }
 
     @Override
-    public void loadView(String lowUrl, String url, int defaultResID) {
-        try {
-            mThumbnailPath = null;
-            mThumbnailUrl = url;
-            mLowThumbnailUrl = url;
-            mDefaultResID = defaultResID;
-            if (!TextUtils.isEmpty(mThumbnailUrl)
-                    && (mThumbnailUrl.startsWith(FrescoController.HTTP_PREFIX)
-                    || mThumbnailUrl.startsWith(FrescoController.HTTPS_PREFIX))) {
-
-                this.getHierarchy().setPlaceholderImage(defaultResID);
-
-                this.setSourceController();
-
-                return;
-            }
-
-            this.getHierarchy().setPlaceholderImage(defaultResID);
-            this.setResourceController();
-
-        } catch (OutOfMemoryError e) {
-            HiLog.error(LABEL_LOG, e.getMessage());
-        }
-    }
-
-    @Override
     public void loadView(String url, int defaultResID) {
         this.loadView(null, url, defaultResID);
     }
 
     @Override
-    public void loadLocalImage(String path, int defaultRes) {
+    public void loadView(String lowUrl, String urlZoom, int defaultResID) {
         try {
-            mThumbnailPath = path;
-            mDefaultResID = defaultRes;
-            mThumbnailUrl = null;
-            mLowThumbnailUrl = null;
+            mLowThumbnailUrl = urlZoom;
+            mDefaultResID = defaultResID;
+            mThumbnailPath = null;
+            mThumbnailUrl = urlZoom;
 
-            this.getHierarchy().setPlaceholderImage(mDefaultResID);
+            if (!TextUtils.isEmpty(mThumbnailUrl)
+                    && (mThumbnailUrl.startsWith(FrescoController.HTTP_PREFIX)
+                    || mThumbnailUrl.startsWith(FrescoController.HTTPS_PREFIX))) {
 
-            if (TextUtils.isEmpty(mThumbnailPath)) {
-                this.setResourceController();
+                this.getHierarchy().setPlaceholderImage(defaultResID);
+                this.setSourceController();
                 return;
             }
-            if (!mThumbnailPath.startsWith(FrescoController.FILE_PREFIX)) {
-                mThumbnailPath = FrescoController.FILE_PREFIX + mThumbnailPath;
-            }
-            this.setSourceController();
+            this.getHierarchy().setPlaceholderImage(defaultResID);
+            this.setResourceController();
+
         } catch (OutOfMemoryError e) {
             HiLog.error(LABEL_LOG, e.getMessage());
         }
@@ -162,6 +157,21 @@ public class FrescoZoomImageView extends ZoomableDraweeView implements FrescoCon
     }
 
     @Override
+    public boolean getTapToRetryEnabled() {
+        return this.mTapToRetry;
+    }
+
+    @Override
+    public String getThumbnailPath() {
+        return this.mThumbnailPath;
+    }
+
+    @Override
+    public boolean getAutoRotateEnabled() {
+        return this.mAutoRotateEnabled;
+    }
+
+    @Override
     public String getThumbnailUrl() {
         return this.mThumbnailUrl;
     }
@@ -172,38 +182,13 @@ public class FrescoZoomImageView extends ZoomableDraweeView implements FrescoCon
     }
 
     @Override
-    public String getThumbnailPath() {
-        return this.mThumbnailPath;
-    }
-
-    @Override
-    public boolean getTapToRetryEnabled() {
-        return this.mTapToRetry;
-    }
-
-    @Override
-    public boolean getAutoRotateEnabled() {
-        return this.mAutoRotateEnabled;
-    }
-
-    @Override
-    public void asCircle() {
-        setRoundingParmas(getRoundingParams().setRoundAsCircle(true));
-    }
-
-    @Override
     public void setBorder(int color, float width) {
         setRoundingParmas(getRoundingParams().setBorder(color, width));
     }
 
     @Override
-    public void clearRoundingParams() {
-        setRoundingParmas(null);
-    }
-
-    @Override
-    public ControllerListener<Object> getControllerListener() {
-        return this.mControllerListener;
+    public void asCircle() {
+        setRoundingParmas(getRoundingParams().setRoundAsCircle(true));
     }
 
     @Override
@@ -217,8 +202,13 @@ public class FrescoZoomImageView extends ZoomableDraweeView implements FrescoCon
     }
 
     @Override
-    public ImageRequest getImageRequest() {
-        return this.mRequest;
+    public void clearRoundingParams() {
+        setRoundingParmas(null);
+    }
+
+    @Override
+    public ControllerListener<Object> getControllerListener() {
+        return this.mControllerListener;
     }
 
     @Override
@@ -231,30 +221,35 @@ public class FrescoZoomImageView extends ZoomableDraweeView implements FrescoCon
     }
 
     @Override
-    public void setRoundingParmas(RoundingParams roundingParmas) {
-        this.getHierarchy().setRoundingParams(roundingParmas);
+    public ImageRequest getImageRequest() {
+        return this.mRequest;
     }
 
     @Override
-    public void setControllerListener(ControllerListener<Object> controllerListener) {
-        this.mControllerListener = controllerListener;
+    public void setRoundingParmas(RoundingParams roundingParmasZoom) {
+        this.getHierarchy().setRoundingParams(roundingParmasZoom);
     }
 
     @Override
-    public void setCircle(int overlayColor) {
+    public void setControllerListener(ControllerListener<Object> controllerListenerZoom) {
+        this.mControllerListener = controllerListenerZoom;
+    }
+
+    @Override
+    public void setCircle(int overlayColorZoom) {
         setRoundingParmas(getRoundingParams().setRoundAsCircle(true)
                 .setRoundingMethod(RoundingParams.RoundingMethod.OVERLAY_COLOR)
-                .setOverlayColor(overlayColor));
+                .setOverlayColor(overlayColorZoom));
     }
 
     @Override
-    public void setCornerRadius(float radius) {
-        setRoundingParmas(getRoundingParams().setCornersRadius(radius));
+    public void setCornerRadius(float radiusZoom) {
+        setRoundingParmas(getRoundingParams().setCornersRadius(radiusZoom));
     }
 
     @Override
-    public void setCornerRadius(float radius, int overlayColor) {
-        setRoundingParmas(getRoundingParams().setCornersRadius(radius)
+    public void setCornerRadius(float radiusZoom, int overlayColor) {
+        setRoundingParmas(getRoundingParams().setCornersRadius(radiusZoom)
                 .setRoundingMethod(RoundingParams.RoundingMethod.OVERLAY_COLOR)
                 .setOverlayColor(overlayColor));
     }
@@ -265,18 +260,18 @@ public class FrescoZoomImageView extends ZoomableDraweeView implements FrescoCon
     }
 
     @Override
-    public void setAnim(boolean anim) {
-        mAnim = anim;
+    public void setAnim(boolean animZoom) {
+        mAnim = animZoom;
     }
 
     @Override
-    public void setTapToRetryEnabled(boolean tapToRetryEnabled) {
-        this.mTapToRetry = tapToRetryEnabled;
+    public void setTapToRetryEnabled(boolean tapToRetryEnabledZoom) {
+        this.mTapToRetry = tapToRetryEnabledZoom;
     }
 
     @Override
-    public void setAutoRotateEnabled(boolean autoRotateEnabled) {
-        this.mAutoRotateEnabled = autoRotateEnabled;
+    public void setAutoRotateEnabled(boolean autoRotateEnabledZoom) {
+        this.mAutoRotateEnabled = autoRotateEnabledZoom;
     }
 
     @Override

@@ -34,16 +34,6 @@ import static org.junit.Assert.*;
 public class FrescoZoomImageOhosTest {
     private final AttrSet attrSet = new AttrSet() {
         @Override
-        public Optional<String> getStyle() {
-            return Optional.empty();
-        }
-
-        @Override
-        public int getLength() {
-            return 0;
-        }
-
-        @Override
         public Optional<Attr> getAttr(int i) {
             return Optional.empty();
         }
@@ -51,6 +41,16 @@ public class FrescoZoomImageOhosTest {
         @Override
         public Optional<Attr> getAttr(String s) {
             return Optional.empty();
+        }
+
+        @Override
+        public Optional<String> getStyle() {
+            return Optional.empty();
+        }
+
+        @Override
+        public int getLength() {
+            return 0;
         }
     };
     private FrescoZoomImageView frescoZoomImageView;
