@@ -16,6 +16,11 @@
 
 package lib.lhh.fiv.library;
 
+import ohos.agp.components.AttrSet;
+import ohos.app.Context;
+import ohos.hiviewdfx.HiLog;
+import ohos.hiviewdfx.HiLogLabel;
+import ohos.utils.net.Uri;
 import com.facebook.animated.giflite.GifDecoder;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
@@ -31,11 +36,6 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
 import com.oszc.bbhmlibrary.wrapper.TextUtils;
-import ohos.agp.components.AttrSet;
-import ohos.app.Context;
-import ohos.hiviewdfx.HiLog;
-import ohos.hiviewdfx.HiLogLabel;
-import ohos.utils.net.Uri;
 
 /**
  * Created by Linhh on 16/2/18.
@@ -48,7 +48,7 @@ public class FrescoImageView extends SimpleDraweeView implements FrescoControlle
 
     private String mLowThumbnailUrl = null; //低分辨率Url
 
-    private int  mDefaultResID = 0;
+    private int  mDefaultResId = 0;
 
     private ImageRequest mRequest;
 
@@ -118,8 +118,8 @@ public class FrescoImageView extends SimpleDraweeView implements FrescoControlle
         final ImageDecodeOptionsBuilder<?> optionsBuilder =
                 ImageDecodeOptions.newBuilder().setMaxDimensionPx(4000);
 
-        GifDecoder mGifDecoder = new GifDecoder();
-        optionsBuilder.setCustomImageDecoder(mGifDecoder);
+        GifDecoder gifDecoder = new GifDecoder();
+        optionsBuilder.setCustomImageDecoder(gifDecoder);
 
         controllerBuilder.setImageRequest(
                 ImageRequestBuilder.newBuilderWithSource(uri)
@@ -133,29 +133,29 @@ public class FrescoImageView extends SimpleDraweeView implements FrescoControlle
     }
 
     @Override
-    public int getDefaultResID() {
-        return this.mDefaultResID;
+    public int getDefaultResId() {
+        return this.mDefaultResId;
     }
 
     @Override
-    public void loadView(String lowUrl, String url, int defaultResID) {
+    public void loadView(String lowUrl, String url, int defaultResId) {
         try {
             mThumbnailPath = null;
             mThumbnailUrl = url;
             mLowThumbnailUrl = url;
-            mDefaultResID = defaultResID;
+            mDefaultResId = defaultResId;
             if (!TextUtils.isEmpty(mThumbnailUrl)
                     && (mThumbnailUrl.startsWith(FrescoController.HTTP_PREFIX)
                     || mThumbnailUrl.startsWith(FrescoController.HTTPS_PREFIX))) {
 
-                this.getHierarchy().setPlaceholderImage(defaultResID);
+                this.getHierarchy().setPlaceholderImage(defaultResId);
 
                 this.setSourceController();
 
                 return;
             }
 
-            this.getHierarchy().setPlaceholderImage(defaultResID);
+            this.getHierarchy().setPlaceholderImage(defaultResId);
             this.setResourceController();
 
         } catch (OutOfMemoryError e) {
@@ -164,19 +164,19 @@ public class FrescoImageView extends SimpleDraweeView implements FrescoControlle
     }
 
     @Override
-    public void loadView(String url, int defaultResID) {
-        this.loadView(null, url, defaultResID);
+    public void loadView(String url, int defaultResId) {
+        this.loadView(null, url, defaultResId);
     }
 
     @Override
     public void loadLocalImage(String path, int defaultRes) {
         try {
             mThumbnailPath = path;
-            mDefaultResID = defaultRes;
+            mDefaultResId = defaultRes;
             mThumbnailUrl = null;
             mLowThumbnailUrl = null;
 
-            this.getHierarchy().setPlaceholderImage(mDefaultResID);
+            this.getHierarchy().setPlaceholderImage(mDefaultResId);
 
             if (TextUtils.isEmpty(mThumbnailPath)) {
                 this.setResourceController();

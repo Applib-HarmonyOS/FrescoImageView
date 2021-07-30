@@ -90,9 +90,9 @@ public class FrescoZoomImageOhosTest {
     }
 
     @Test
-    public void testDefaultResID() {
+    public void testDefaultResId() {
         frescoZoomImageView.loadView(IMG_URL, 5);
-        assertEquals(5, frescoZoomImageView.getDefaultResID());
+        assertEquals(5, frescoZoomImageView.getDefaultResId());
     }
 
     @Test

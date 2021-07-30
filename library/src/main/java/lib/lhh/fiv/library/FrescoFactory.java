@@ -16,13 +16,13 @@
 
 package lib.lhh.fiv.library;
 
-
+import ohos.utils.net.Uri;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.oszc.bbhmlibrary.wrapper.TextUtils;
-import ohos.utils.net.Uri;
+
 
 /**
  * Created by Linhh on 16/3/2.
@@ -57,7 +57,7 @@ public class FrescoFactory {
      * @return ImageRequest
      */
     public static ImageRequest buildImageRequestWithResource(BaseFrescoImageView fresco) {
-        return  ImageRequestBuilder.newBuilderWithResourceId(fresco.getDefaultResID())
+        return  ImageRequestBuilder.newBuilderWithResourceId(fresco.getDefaultResId())
                 .setPostprocessor(fresco.getPostProcessor())
                 .setLocalThumbnailPreviewsEnabled(true)
                 .build();

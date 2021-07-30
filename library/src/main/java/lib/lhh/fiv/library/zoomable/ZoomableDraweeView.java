@@ -24,7 +24,13 @@ package lib.lhh.fiv.library.zoomable;
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
+import ohos.agp.components.AttrSet;
+import ohos.agp.components.Component;
+import ohos.agp.render.Canvas;
+import ohos.agp.utils.Matrix;
+import ohos.agp.utils.Point;
+import ohos.app.Context;
+import ohos.multimodalinput.event.TouchEvent;
 import com.facebook.common.internal.Preconditions;
 import com.facebook.drawee.controller.AbstractDraweeController;
 import com.facebook.drawee.controller.BaseControllerListener;
@@ -33,13 +39,6 @@ import com.facebook.drawee.drawable.Animatable;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.GenericDraweeView;
 import com.oszc.bbhmlibrary.wrapper.RectF;
-import ohos.agp.components.AttrSet;
-import ohos.agp.components.Component;
-import ohos.agp.render.Canvas;
-import ohos.agp.utils.Matrix;
-import ohos.agp.utils.Point;
-import ohos.app.Context;
-import ohos.multimodalinput.event.TouchEvent;
 
 /**
  * DraweeView that has zoomable capabilities.

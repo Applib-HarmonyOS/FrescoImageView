@@ -16,10 +16,10 @@
 
 package com.lhh.frescoimageview.demo.slice;
 
-import com.lhh.frescoimageview.demo.ResourceTable;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
 import ohos.agp.components.Button;
+import com.lhh.frescoimageview.demo.ResourceTable;
 
 /**
  * MainAbilitySlice class.

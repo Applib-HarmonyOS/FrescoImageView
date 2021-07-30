@@ -79,7 +79,7 @@ public interface BaseFrescoImageView {
      *
      * @return int
      */
-    int getDefaultResID();
+    int getDefaultResId();
 
     /**
      * 获得当前加载的图片.
