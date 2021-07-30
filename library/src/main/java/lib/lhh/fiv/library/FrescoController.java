@@ -35,17 +35,17 @@ public interface FrescoController {
      *
      * @param lowUrl 低分辨率图片
      * @param url 网络图片
-     * @param defaultResID 默认图
+     * @param defaultResId 默认图
      */
-    void loadView(String lowUrl, String url, int defaultResID);
+    void loadView(String lowUrl, String url, int defaultResId);
 
     /**
      * 加载网络图片.
      *
      * @param url 网络图片
-     * @param defaultResID 默认图
+     * @param defaultResId 默认图
      */
-    void loadView(String url, int defaultResID);
+    void loadView(String url, int defaultResId);
 
     /**
      * 加载本地图片.

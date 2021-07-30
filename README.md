@@ -63,15 +63,15 @@ FrescoImageView frescoImageView = (FrescoImageView) findComponentById(ResourceTa
 
 ### Load network pictures
 
-Call the void loadView(String url, int defaultResID) method.
+Call the void loadView(String url, int defaultResId) method.
 
-url represents the address of the network image that needs to be loaded, and defaultResID represents the placeholder image (default image).
+url represents the address of the network image that needs to be loaded, and defaultResId represents the placeholder image (default image).
 
 ```java
 frescoImageView.loadView(mImgUrl, ResourceTable.Media_icon);
 ```
 
-If you need to display the default image first, then load and display a low-resolution image, and finally display the original image, you can use the void loadView(String lowUrl ,String url, int defaultResID) method, and lowUrl represents the low-resolution image address.
+If you need to display the default image first, then load and display a low-resolution image, and finally display the original image, you can use the void loadView(String lowUrl ,String url, int defaultResId) method, and lowUrl represents the low-resolution image address.
 
 ### Load network GIFs.
 

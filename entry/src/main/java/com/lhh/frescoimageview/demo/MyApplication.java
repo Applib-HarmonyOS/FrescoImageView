@@ -16,8 +16,8 @@
 
 package com.lhh.frescoimageview.demo;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import ohos.aafwk.ability.AbilityPackage;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 /**
  * MyApplication class.

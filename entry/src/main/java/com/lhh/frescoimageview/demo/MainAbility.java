@@ -16,9 +16,9 @@
 
 package com.lhh.frescoimageview.demo;
 
-import com.lhh.frescoimageview.demo.slice.MainAbilitySlice;
 import ohos.aafwk.ability.Ability;
 import ohos.aafwk.content.Intent;
+import com.lhh.frescoimageview.demo.slice.MainAbilitySlice;
 
 /**
  * MainAbility class.

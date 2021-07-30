@@ -12,10 +12,9 @@
 
 package lib.lhh.fiv.library.zoomable;
 
-
-import com.oszc.bbhmlibrary.wrapper.RectF;
 import ohos.agp.utils.Matrix;
 import ohos.multimodalinput.event.TouchEvent;
+import com.oszc.bbhmlibrary.wrapper.RectF;
 
 /**
  * Interface for implementing a controller that works with {@link ZoomableDraweeView}

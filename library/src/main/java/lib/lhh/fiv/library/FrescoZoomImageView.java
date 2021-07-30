@@ -16,6 +16,10 @@
 
 package lib.lhh.fiv.library;
 
+import ohos.agp.components.AttrSet;
+import ohos.app.Context;
+import ohos.hiviewdfx.HiLog;
+import ohos.hiviewdfx.HiLogLabel;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.generic.RoundingParams;
@@ -24,11 +28,6 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.Postprocessor;
 import com.oszc.bbhmlibrary.wrapper.TextUtils;
 import lib.lhh.fiv.library.zoomable.ZoomableDraweeView;
-import ohos.agp.components.AttrSet;
-import ohos.app.Context;
-import ohos.hiviewdfx.HiLog;
-import ohos.hiviewdfx.HiLogLabel;
-
 
 /**
  * Created by Linhh on 16/2/18.
@@ -40,7 +39,7 @@ public class FrescoZoomImageView extends ZoomableDraweeView implements FrescoCon
 
     private String mLowThumbnailUrl = null; //低分辨率Url
 
-    private int  mDefaultResID = 0;
+    private int  mDefaultResId = 0;
 
     private ImageRequest mRequest;
 
@@ -92,8 +91,8 @@ public class FrescoZoomImageView extends ZoomableDraweeView implements FrescoCon
     public void loadLocalImage(String path, int defaultResZoom) {
         try {
             mThumbnailPath = path;
-            mDefaultResID = defaultResZoom;
-            this.getHierarchy().setPlaceholderImage(mDefaultResID);
+            mDefaultResId = defaultResZoom;
+            this.getHierarchy().setPlaceholderImage(mDefaultResId);
 
             if (TextUtils.isEmpty(mThumbnailPath)) {
                 this.setResourceController();
@@ -113,20 +112,20 @@ public class FrescoZoomImageView extends ZoomableDraweeView implements FrescoCon
     }
 
     @Override
-    public int getDefaultResID() {
-        return this.mDefaultResID;
+    public int getDefaultResId() {
+        return this.mDefaultResId;
     }
 
     @Override
-    public void loadView(String url, int defaultResID) {
-        this.loadView(null, url, defaultResID);
+    public void loadView(String url, int defaultResId) {
+        this.loadView(null, url, defaultResId);
     }
 
     @Override
-    public void loadView(String lowUrl, String urlZoom, int defaultResID) {
+    public void loadView(String lowUrl, String urlZoom, int defaultResId) {
         try {
             mLowThumbnailUrl = urlZoom;
-            mDefaultResID = defaultResID;
+            mDefaultResId = defaultResId;
             mThumbnailPath = null;
             mThumbnailUrl = urlZoom;
 
@@ -134,11 +133,11 @@ public class FrescoZoomImageView extends ZoomableDraweeView implements FrescoCon
                     && (mThumbnailUrl.startsWith(FrescoController.HTTP_PREFIX)
                     || mThumbnailUrl.startsWith(FrescoController.HTTPS_PREFIX))) {
 
-                this.getHierarchy().setPlaceholderImage(defaultResID);
+                this.getHierarchy().setPlaceholderImage(defaultResId);
                 this.setSourceController();
                 return;
             }
-            this.getHierarchy().setPlaceholderImage(defaultResID);
+            this.getHierarchy().setPlaceholderImage(defaultResId);
             this.setResourceController();
 
         } catch (OutOfMemoryError e) {

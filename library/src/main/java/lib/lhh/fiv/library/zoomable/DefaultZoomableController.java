@@ -12,12 +12,11 @@
 
 package lib.lhh.fiv.library.zoomable;
 
-
-import com.oszc.bbhmlibrary.wrapper.RectF;
-import lib.lhh.fiv.library.gestures.TransformGestureDetector;
 import ohos.agp.utils.Matrix;
 import ohos.agp.utils.Point;
 import ohos.multimodalinput.event.TouchEvent;
+import com.oszc.bbhmlibrary.wrapper.RectF;
+import lib.lhh.fiv.library.gestures.TransformGestureDetector;
 
 /**
  * Zoomable controller that calculates transformation based on touch events.
