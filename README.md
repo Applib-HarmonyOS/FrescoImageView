@@ -14,6 +14,31 @@ Inspired from android library [https://github.com/HomHomLin/FrescoImageView](htt
  * Only one step is required to load pictures, no complicated settings are required
  * Supports two-finger zoom, and supports click events, instead of PhotoView controls
 
+#### Installation
+1. For using FrescoImageView module in sample app, include the source code and add the below dependencies in entry/build.gradle to generate hap/support.har.
+```
+	dependencies {
+		implementation project(':frescoimageview')
+        	implementation fileTree(dir: 'libs', include: ['*.har'])
+        	testCompile 'junit:junit:4.12'
+	}
+```
+2. For using FrescoImageView in separate application using har file, add the har file in the entry/libs folder and add the dependencies in entry/build.gradle file.
+```
+	dependencies {
+		implementation fileTree(dir: 'libs', include: ['*.har'])
+		testCompile 'junit:junit:4.12'
+	}
+
+```
+3. For using FrescoImageView from a remote repository in separate application, add the below dependencies in entry/build.gradle file.
+```
+	dependencies {
+		implementation 'dev.applibgroup:frescoimageview:1.0.0'
+		testCompile 'junit:junit:4.12'
+	}
+```
+
 ## Usage
 
 ### Configure Fresco
