@@ -1,4 +1,4 @@
-# Fresco-ImageView
+# Fresco-ImageView [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=applibgroup_FrescoImageView&metric=alert_status)](https://sonarcloud.io/dashboard?id=applibgroup_FrescoImageView) [![Build](https://github.com/applibgroup/FrescoImageView/actions/workflows/main.yml/badge.svg)](https://github.com/applibgroup/FrescoImageView/actions/workflows/main.yml)
 
 FrescoImageView is an image control for the HarmonyOS platform that can asynchronously load network pictures, project resources and local pictures, and supports two-finger zooming, basic image processing, and all the features of Fresco.
 
